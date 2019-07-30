@@ -1,5 +1,6 @@
 package com.example.tachtheapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,7 +15,15 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+//  １引数  doInBackground() バックグラウンド処理の引数, 2引数 進捗度合いを表示したい時に使うパラメータ, 3引数　onPostExecute() 処理終了時に受け取る型
 public class POstAccess extends AsyncTask<String, String, String> {
+
+    private Activity ResultActivity;
+
+    public POstAccess(Activity activity){
+        this.ResultActivity = activity;
+    }
+
 
 
 
@@ -27,6 +36,8 @@ public class POstAccess extends AsyncTask<String, String, String> {
         String body = params[2];
 
         String setParametor = "Header" + header + "Body" + body;
+
+
 
         HttpsURLConnection con =  null;
         InputStream is = null;
@@ -70,7 +81,7 @@ public class POstAccess extends AsyncTask<String, String, String> {
             }
             final int status = con.getResponseCode();
             if (status == HttpsURLConnection.HTTP_OK){
-
+                result = "HTTP_OK";
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -79,8 +90,21 @@ public class POstAccess extends AsyncTask<String, String, String> {
                 con.disconnect();
             }
         }
-        return null;
+        return result;
     }
+
+
+
+    @Override
+    protected void onPostExecute(String result){
+            super.onPostExecute(result);
+
+
+
+
+
+    }
+
 
 
 

@@ -172,7 +172,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private String getHashValue(String algorithName, String value){
         MessageDigest md = null;
         StringBuilder sb = null;

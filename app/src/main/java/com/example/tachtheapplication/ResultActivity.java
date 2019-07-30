@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONObject;
 
 public class ResultActivity extends AppCompatActivity {
-
 
 
     @Override
@@ -23,6 +24,8 @@ public class ResultActivity extends AppCompatActivity {
         //Hash値
         TextView HashDataText = findViewById(R.id.hashDataText);
 
+        Button sendBtn = findViewById(R.id.sendWebBtn);
+
 
         //今回の場合、btnタップしないでResultActivityが起動したら、intentはnullになる。
         Intent intent = getIntent();
@@ -35,6 +38,16 @@ public class ResultActivity extends AppCompatActivity {
         }else {
             RawDataText.setText("nullです。");
         }
+
+        final POstAccess pOstAccess = new POstAccess(this);
+
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                pOstAccess.execute("https://www.google.com/?hl=ja", "header","body");
+            }
+        });
 
 
 
